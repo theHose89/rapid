@@ -24,6 +24,18 @@ function printAscii(imageData, width, height) {
 }
 
 
+const input = document.getElementById('imageUpload');
+const preview = document.getElementById('preview');
+
+  input.addEventListener('change', function() {
+    const file = this.files[0]; // Get the selected file
+    if (file) {
+      // Create a temporary local path
+      const imgPath = URL.createObjectURL(file);
+      preview.src = imgPath;
+      preview.style.display = 'block';
+    }
+  });
 
 async function ascii(path) {
   const imagePath = path;

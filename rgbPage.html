@@ -9,10 +9,22 @@
 </head>
 <body>
     <div class ="container">
-    <h1>ASCII Art Generator</h1>
-    <h3>Upload an Image to Convert to ASCII Art</h3>
-        
-    <p>Select Image: <input type="file" id="imageUpload" name="imageUpload" accept="image/*"></p>
+    <h1>RGB Editor</h1>
+    <div class="sliders">
+    <p style="color: red;">Red:
+    <input type="range" id="redSlider" name="red" min="0" max="255" value="50"oninput="this.nextElementSibling.value = this.value">
+    <output>50</output>
+    
+    <p style="color: green;">Green:
+    <input type="range" id="greenSlider" name="green" min="0" max="255" value="50"oninput="this.nextElementSibling.value = this.value">
+    <output>50</output>
+   
+    <p style="color: blue;">Blue:
+    <input type="range" id="blueSlider" name="blue" min="0" max="255" value="50"oninput="this.nextElementSibling.value = this.value">
+    <output>50</output> 
+    
+    </div>
+
     
     <div class="btns">
     <button id="convertButton">Convert to ASCII</button>
