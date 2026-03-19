@@ -17,14 +17,10 @@ function printAscii(imageData, width, height) {
   }
 }
 
-async function main() {
-  const args = process.argv.slice(2);
-  if (args.length === 0) {
-    console.error("Usage: node main.js <image_path>");
-    process.exit(1);
-  }
 
-  const imagePath = args[0];
+
+async function ascii(path) {
+  const imagePath = path;
 
   try {
     const image = await Jimp.read(imagePath);
@@ -43,9 +39,43 @@ async function main() {
 
     printAscii(imageData, width, height);
   } catch (err) {
-    console.error("Failed to load image:", err.message);
+    console.error("Failed to load image", err.message);
     process.exit(1);
   }
 }
 
-main();
+async function rgbVal(path) {
+  const imagePath = path;
+
+  try {
+    const image = await Jimp.read(imagePath);
+
+    const width = image.width;
+    const height = image.height;
+    const imageData = new Uint8Array(width * height);
+
+    for (let i = 0; i < height*5; i++) {
+        let row = "";
+        for (let j = 0; j < width; j++) {
+            const pixel = image.getPixelColor(j, i);
+            const rgba = Jimp.intToRGBA(pixelColorInt);
+            if(height % 4 === 0){
+                row += '${rgba.r} ';
+            }else if(height % 4 === 1){
+                row += '${rgba.g} ';
+            }else if(height % 4 === 2){
+                row += '${rgba.b} ';
+            }else if(height % 4 === 3){
+                row += '${rgba.a} ';
+            }
+        }
+        row += '\n';
+    }
+
+    printAscii(imageData, width, height);
+  } catch (err) {
+    console.error("Failed to load image", err.message);
+    process.exit(1);
+  }
+}
+
