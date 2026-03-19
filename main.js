@@ -21,19 +21,15 @@ function printAscii(imageData, width, height) {
 const input = document.getElementById('imageUpload');
 const preview = document.getElementById('preview');
 
-  input.addEventListener('change', function() {
-    const file = this.files[0]; // Get the selected file
-    if (file) {
-      // Create a temporary local path
-      const imgPath = URL.createObjectURL(file);
-      preview.src = imgPath;
-      preview.style.display = 'block';
-    }
-  });
+  
+  
+const btn = document.getElementById("convertButton");
+btn.onclick = async function ascii() {
+  
 
-async function ascii(path) {
-  const imagePath = path;
+    const imagePath = URL.createObjectURL(file);
 
+  alert("Button was clicked!");
   try {
     const image = await Jimp.read(imagePath);
     image.grayscale();
@@ -91,3 +87,8 @@ async function rgbVal(path) {
   }
 }
 
+
+
+function myFunction() {
+  console.log("Button was clicked!");
+}

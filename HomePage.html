@@ -14,15 +14,25 @@
 
     
     
-    <p>Select Image: <input type="file" id="imageUpload" name="imageUpload" accept="image/*"></p>
-    <img id="preview" style="width: 200px; display: none;">
+    <p>Select Image:  
+         <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+    
     <div class="btns">
     <button id="convertButton">Convert to ASCII</button>
     
     <a href="rgbPage.html"><button id="rgbButton">Edit RGB Values</button></a>
     </div>
     
-    
+    <img id="preview" style=" display: none;" src="ascii-art.png">
     
 </body>
 </html>
+
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("convertButton").addEventListener("click", function() {
+        const preview = document.getElementById('preview');
+        preview.style.display = 'block';
+    });
+});
+</script>
