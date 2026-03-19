@@ -1,7 +1,10 @@
 import Jimp from "jimp";
 
+//<button id="convertButton" onclick="rgbVal(name)">Convert to ASCII </button>
+
 function printAscii(imageData, width, height) {
-  for (let i = 0; i < height; i++) {
+    output = "";
+    for (let i = 0; i < height; i++) {
     let row = "";
     for (let j = 0; j < width; j++) {
       const pixel = imageData[i * width + j];
@@ -13,8 +16,11 @@ function printAscii(imageData, width, height) {
         row += "? ";
       }
     }
-    console.log(row);
+    row += '\n';
+    output += row;
   }
+
+  return output;
 }
 
 
@@ -45,10 +51,10 @@ btn.onclick = async function ascii() {
       }
     }
 
-    printAscii(imageData, width, height);
+    output = printAscii(imageData, width, height);
   } catch (err) {
     console.error("Failed to load image", err.message);
-    process.exit(1);
+    return output;
   }
 }
 
@@ -62,25 +68,27 @@ async function rgbVal(path) {
     const height = image.height;
     const imageData = new Uint8Array(width * height);
 
+    output = "";
     for (let i = 0; i < height*5; i++) {
         let row = "";
         for (let j = 0; j < width; j++) {
             const pixel = image.getPixelColor(j, i);
             const rgba = Jimp.intToRGBA(pixelColorInt);
             if(height % 4 === 0){
-                row += '${rgba.r} ';
+                row += rgba.r;
             }else if(height % 4 === 1){
-                row += '${rgba.g} ';
+                row += rgba.g;
             }else if(height % 4 === 2){
-                row += '${rgba.b} ';
+                row += rgba.b;
             }else if(height % 4 === 3){
-                row += '${rgba.a} ';
+                row += rgba.a;
             }
         }
         row += '\n';
+        output += row;
     }
 
-    printAscii(imageData, width, height);
+    return output;
   } catch (err) {
     console.error("Failed to load image", err.message);
     process.exit(1);
